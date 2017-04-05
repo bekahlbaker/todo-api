@@ -138,7 +138,7 @@ app.put('/todos/:id', middleware.requireAuthentication, function(req, res) {
 
 // POST /users
 app.post('/users', function (req, res) {
-	var body = _.pick(req.body, 'email', 'password');
+	var body = _.pick(req.body, 'uuid');
 
 	db.user.create(body).then(function (user) {
 		res.json(user.toPublicJSON());
@@ -149,7 +149,7 @@ app.post('/users', function (req, res) {
 
 // POST /users/login
 app.post('/users/login', function (req, res) {
-	var body = _.pick(req.body, 'email', 'password');
+	var body = _.pick(req.body, 'uuid');
 
 	db.user.authenticate(body).then(function (user) {
 		var token = user.generateToken('authentication');
